@@ -28,15 +28,12 @@ public class JugTemplate extends WebPage {
 	private Component footerPanel;
  
     public JugTemplate(){
-		headerPanel = new HeaderPanel("headerPanel");
-		menuPanel = new MenuPanel("menuPanel");
-		footerPanel = new FooterPanel("footerPanel");
-		add(headerPanel);
-		add(menuPanel);
-		add(footerPanel);
+		add(headerPanel = new HeaderPanel("headerPanel"));
+		add(menuPanel = new MenuPanel("menuPanel"));
+		add(footerPanel = new FooterPanel("footerPanel"));
 		add(new Label(CONTENT_ID, "Put your content here"));
 	}
-    //getters for layout areas
+	
 	protected Component getHeaderPanel() {
 		return headerPanel;
 	}

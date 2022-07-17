@@ -16,29 +16,25 @@
  */
 package org.wicketTutorial.markupinherit;
 
-import org.apache.wicket.MetaDataKey;
-
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
-import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.model.CompoundPropertyModel;
-import org.apache.wicket.model.Model;
 
 public class LoginPanel extends Panel {
 	public LoginPanel(String id) {
 		super(id);		
-		init();
+		initialize();
 	}
 	
-	private void init(){
-		Form loginForm = new LoginForm("loginForm");
+	private void initialize(){
+		final Form<Void> loginForm = new LoginForm("loginForm");
 		add(loginForm);
 	}
 	
-	public class LoginForm extends Form{
+	public class LoginForm extends Form<Void> {
 		private String username;
 		private String password;
 		private String loginStatus;
@@ -48,7 +44,7 @@ public class LoginPanel extends Panel {
 			
 			setDefaultModel(new CompoundPropertyModel(this));
 			
-			add(new TextField("username"));
+			add(new TextField<String>("username"));
 			add(new PasswordTextField("password"));
 			add(new Label("loginStatus"));
 		}

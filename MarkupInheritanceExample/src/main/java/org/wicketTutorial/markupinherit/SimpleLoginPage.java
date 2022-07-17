@@ -16,7 +16,6 @@
  */
 package org.wicketTutorial.markupinherit;
 
-import org.apache.wicket.markup.html.basic.Label;
 import org.wicketTutorial.markupinherit.layoutTenda.JugTemplate;
 
 public class SimpleLoginPage extends JugTemplate {
