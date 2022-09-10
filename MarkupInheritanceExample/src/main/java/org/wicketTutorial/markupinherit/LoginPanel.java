@@ -16,6 +16,7 @@
  */
 package org.wicketTutorial.markupinherit;
 
+import org.apache.logging.log4j.util.Strings;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -42,11 +43,18 @@ public class LoginPanel extends Panel {
 		public LoginForm(String id) {
 			super(id);
 			
-			setDefaultModel(new CompoundPropertyModel(this));
+			setDefaultModel(new CompoundPropertyModel<LoginForm>(this));
 			
 			add(new TextField<String>("username"));
 			add(new PasswordTextField("password"));
-			add(new Label("loginStatus"));
+			final Label statusLabel = new Label("loginStatus", () -> loginStatus) {
+				@Override
+				protected void onConfigure() {
+					setVisible(Strings.isNotBlank(loginStatus));
+					super.onConfigure();
+				}
+			};
+			add(statusLabel);
 		}
 
 		public final void onSubmit() {			
