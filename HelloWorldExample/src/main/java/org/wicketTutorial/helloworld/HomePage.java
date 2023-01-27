@@ -16,11 +16,8 @@
  */
 package org.wicketTutorial.helloworld;
 
-import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
-import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.WebPage;
+import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 
 public class HomePage extends BootstrapBasePage {
 	public HomePage() {		

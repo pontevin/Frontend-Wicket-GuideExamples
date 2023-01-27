@@ -17,7 +17,6 @@
 package org.wicketTutorial.helloworld;
 
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.protocol.http.WebApplication;
 import org.wicketTutorial.commons.bootstrap.BootstrapApp;
 
 /**
