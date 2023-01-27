@@ -3,5 +3,4 @@ target
 .classpath
 .metadata
 .settings
-.xml~
-
+.DS_Store
