@@ -18,20 +18,19 @@ package org.wicketTutorial.markupinherit.layoutTenda;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.markup.html.basic.Label;
 
-public class JugTemplate extends WebPage {
-	public static final String CONTENT_ID = "contentComponent";
+public abstract class JugTemplate extends WebPage {
+	private static final String CONTENT_ID = "contentComponent";
 
 	private Component headerPanel;
 	private Component menuPanel;
 	private Component footerPanel;
  
-    public JugTemplate(){
+    public JugTemplate() {
 		add(headerPanel = new HeaderPanel("headerPanel"));
 		add(menuPanel = new MenuPanel("menuPanel"));
 		add(footerPanel = new FooterPanel("footerPanel"));
-		add(new Label(CONTENT_ID, "Put your content here"));
+		add(getContenComponent(CONTENT_ID));
 	}
 	
 	protected Component getHeaderPanel() {
@@ -45,4 +44,6 @@ public class JugTemplate extends WebPage {
 	protected Component getFooterPanel() {
 		return footerPanel;
 	}
+
+	protected abstract Component getContenComponent(String id);
 }

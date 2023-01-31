@@ -16,12 +16,17 @@
  */
 package org.wicketTutorial.markupinherit;
 
+import org.apache.wicket.Component;
 import org.wicketTutorial.markupinherit.layoutTenda.JugTemplate;
 
 public class SimpleLoginPage extends JugTemplate {
-	public SimpleLoginPage(){
+	public SimpleLoginPage() {
 		super();
-		replace(new LoginPanel(CONTENT_ID));
 		getMenuPanel().setVisible(false);
+	}
+
+	@Override
+	protected Component getContenComponent(final String id) {
+		return new LoginPanel(id);
 	}
 }
