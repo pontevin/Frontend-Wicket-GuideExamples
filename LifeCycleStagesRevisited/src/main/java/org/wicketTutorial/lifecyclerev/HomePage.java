@@ -16,13 +16,9 @@
  */
 package org.wicketTutorial.lifecyclerev;
 
-import org.apache.wicket.Component;
-import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.link.StatelessLink;
-import org.apache.wicket.util.visit.IVisitor;
-import org.apache.wicket.util.visit.IVisit;
+import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 
 public class HomePage extends BootstrapBasePage
 {
@@ -45,6 +41,5 @@ public class HomePage extends BootstrapBasePage
 					getPage().replace(firstLabel);		
 			}
 		});	
-		
 	}
 }
