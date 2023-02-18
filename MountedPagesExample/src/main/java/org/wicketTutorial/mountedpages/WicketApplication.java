@@ -44,6 +44,7 @@ public class WicketApplication extends BootstrapApp
 		super.init();
 		mountPage("/pageMount", MountedPage.class);
 		mountPage("/pageMount/#{foo}/otherSegm", MountedPageWithPlaceholder.class);
-		mountPackage("/mountPackage", StatefulPackageMount.class);
+		// Mounting only for one class from package
+		mountPackage("/packageMount", StatefulPackageMount.class);
 	}
 }

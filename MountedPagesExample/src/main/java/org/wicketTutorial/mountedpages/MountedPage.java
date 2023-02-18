@@ -21,9 +21,9 @@ import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class MountedPage extends BootstrapBasePage {
+	
 	public MountedPage() {
 		super();
-		
 	}
 
 	public MountedPage(PageParameters parameters) {
@@ -36,13 +36,10 @@ public class MountedPage extends BootstrapBasePage {
 		setStatelessHint(true);
 		
 		add(new Link<Void>("goHome") {
-
 			@Override
 			public void onClick() {
 				setResponsePage(getApplication().getHomePage());
 			}
-			
 		});
 	}
-	
 }

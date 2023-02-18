@@ -16,43 +16,34 @@
  */
 package org.wicketTutorial.mountedpages;
 
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 import org.wicketTutorial.mountedpages.subPackage.StatefulPackageMount;
 import org.wicketTutorial.mountedpages.subPackage.StatelessPackageMount;
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.link.StatelessLink;
-import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 
 public class HomePage extends BootstrapBasePage {
 	private static final long serialVersionUID = 1L;
 
     public HomePage(final PageParameters parameters) {
 		add(new Link<Void>("statefulPageMount") {
-
 			@Override
 			public void onClick() {
-				PageParameters pageParameters = new PageParameters();
-				
+				final PageParameters pageParameters = new PageParameters();
 				setResponsePage(MountedPage.class, pageParameters);
 			}
-			
 		});
 		
 		add(new Link<Void>("mountedPageWithPlaceholder") {
-
 			@Override
 			public void onClick() {
-				PageParameters pageParameters = new PageParameters();
-				pageParameters.add("foo", "foo");
-				
-				setResponsePage(MountedPageWithPlaceholder.class,pageParameters);
+				final PageParameters pageParameters = new PageParameters();
+				pageParameters.add("foo", "bar");
+				setResponsePage(MountedPageWithPlaceholder.class, pageParameters);
 			}
-			
 		});
 		
     	add(new Link<Void>("statelessPackage") {
-
 			@Override
 			public void onClick() {
 				setResponsePage(StatelessPackageMount.class);
@@ -60,13 +51,10 @@ public class HomePage extends BootstrapBasePage {
 		});
 		
 		add(new Link<Void>("statefulPackage") {
-
 			@Override
 			public void onClick() {
-				
 				setResponsePage(StatefulPackageMount.class);
 			}
 		});
-				
     }
 }

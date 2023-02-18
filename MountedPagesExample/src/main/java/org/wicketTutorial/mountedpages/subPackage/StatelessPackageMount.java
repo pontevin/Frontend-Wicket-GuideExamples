@@ -24,14 +24,16 @@ public class StatelessPackageMount extends BootstrapBasePage {
 
 	public StatelessPackageMount(PageParameters parameters) {
 		super(parameters);
-		add(new StatelessLink<Void>("goHome") {
+	}
 
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
+		add(new StatelessLink<Void>("goHome") {
 			@Override
 			public void onClick() {
 				setResponsePage(getApplication().getHomePage());
 			}
-			
 		});
 	}
-	
 }

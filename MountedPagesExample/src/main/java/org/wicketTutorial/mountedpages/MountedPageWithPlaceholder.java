@@ -31,12 +31,10 @@ public class MountedPageWithPlaceholder extends BootstrapBasePage {
 		setStatelessHint(true);
 		
 		add(new StatelessLink<Void>("goHome") {
-
 			@Override
 			public void onClick() {
 				setResponsePage(getApplication().getHomePage());
 			}
-			
 		});
 	}
 }

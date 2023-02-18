@@ -16,10 +16,9 @@
  */
 package org.wicketTutorial.mountedpages.subPackage;
 
-import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 import org.apache.wicket.markup.html.link.Link;
-import org.apache.wicket.markup.html.link.StatelessLink;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 
 public class StatefulPackageMount extends BootstrapBasePage {
 
@@ -35,13 +34,10 @@ public class StatefulPackageMount extends BootstrapBasePage {
 	protected void onInitialize() {
 		super.onInitialize();
 		add(new Link<Void>("goHome") {
-
 			@Override
 			public void onClick() {
 				setResponsePage(getApplication().getHomePage());
 			}
-			
 		});
 	}
-
 }
