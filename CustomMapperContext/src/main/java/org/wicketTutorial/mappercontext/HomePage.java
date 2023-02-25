@@ -16,10 +16,8 @@
  */
 package org.wicketTutorial.mappercontext;
 
-import org.apache.wicket.Application;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 
 public class HomePage extends BootstrapBasePage {
@@ -27,14 +25,13 @@ public class HomePage extends BootstrapBasePage {
 
     public HomePage(final PageParameters parameters) {
     	add(new Link<Void>("nonBookmarkablePage"){
-
 			@Override
 			public void onClick() {
 				setResponsePage(new NonBookmarkablePage());
 			}			
 		});
-    	add(new Link<Void>("bookmarkablePage"){
 
+    	add(new Link<Void>("bookmarkablePage"){
 			@Override
 			public void onClick() {
 				setResponsePage(BookmarkablePage.class);

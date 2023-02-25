@@ -23,7 +23,6 @@ import org.apache.wicket.markup.html.link.Link;
 public class NonBookmarkablePage extends BootstrapBasePage {
 	public NonBookmarkablePage(){
 		add(new Link<Void>("goBack"){
-
 			@Override
 			public void onClick() {
 				setResponsePage(Application.get().getHomePage());
