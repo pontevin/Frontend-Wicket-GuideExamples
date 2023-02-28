@@ -16,10 +16,8 @@
  */
 package org.wicketTutorial.modelchain;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -27,56 +25,66 @@ import org.apache.wicket.markup.html.form.FormComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
+import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 
 public class PersonListDetails extends BootstrapBasePage {
-	private Form form;
-	private DropDownChoice<Person> personsList;
+	private final Form<Person> form;
+	private final DropDownChoice<Person> personChoice;
 	
 	public PersonListDetails(){
-		Model<Person> listModel = new Model<Person>();
-		ChoiceRenderer<Person> personRender = new ChoiceRenderer<Person>(){
+
+		final Model<Person> personChoiceModel = new Model<Person>();
+		final ChoiceRenderer<Person> personRenderer = new ChoiceRenderer<Person>() {
 			@Override
-			public Object getDisplayValue(Person person) {
+			public Object getDisplayValue(final Person person) {
 				return person.getName() + " " + person.getSurname();
+			}
+			@Override
+			public String getIdValue(final Person person, final int index) {
+				return person.getEmail();
 			}
 		};
 		
-		personsList = new DropDownChoice<Person>("persons", listModel, personsPojo(),personRender);
-		personsList.add(new FormComponentUpdatingBehavior());
-				
-		add(personsList);		
+		personChoice = new DropDownChoice<Person>("persons", personChoiceModel, getPersons(), personRenderer);
+		personChoice.add(new FormComponentUpdatingBehavior());
+		add(personChoice);		
 		
-		form = new Form("form", new CompoundPropertyModel<Person>(listModel));		
-		form.add(new TextField("name"));
-		form.add(new TextField("surname"));
-		form.add(new TextField("address"));
-		form.add(new TextField("email"));
-		
+		final CompoundPropertyModel<Person> personFormModel = new CompoundPropertyModel<Person>(personChoiceModel);
+		form = new Form<Person>("form", personFormModel);		
+		form.add(new TextField<String>("firstName", personFormModel.bind("name")));
+		form.add(new TextField<String>("lastName", personFormModel.bind("surname")));
+		form.add(new TextField<String>("address"));
+		form.add(new TextField<String>("email"));
 		add(form);
 	}
 	
-	private static List<Person> personsPojo() {
-		List<Person> persons = new ArrayList<Person>();
-		Person person = new Person("John", "Smith");
-		
+	private static List<Person> getPersons() {
+		final List<Person> persons = List.of(
+			createJohn(),
+			createJill(),
+			createTim()
+		);
+		return persons;
+	}
+
+	private static Person createJohn() {
+		final Person person = new Person("John", "Smith");
 		person.setAddress("Corner street");
 		person.setEmail("john.smith@gmail.com");
-		persons.add(person);
-		
-		person = new Person("Jill", "Smith");
-		
+		return person;
+	}
+
+	private static Person createJill() {
+		final Person person = new Person("Jill", "Smith");
 		person.setAddress("Main street");
 		person.setEmail("jill.smith@gmail.com");
-		
-		persons.add(person);
-		
-		person = new Person("Tim", "Spencer");
-		
+		return person;
+	}
+
+	private static Person createTim() {
+		final Person person = new Person("Tim", "Spencer");
 		person.setAddress("Second street");
 		person.setEmail("tim.spencer@gmail.com");
-		
-		persons.add(person);
-		
-		return persons;
+		return person;
 	}
 }
