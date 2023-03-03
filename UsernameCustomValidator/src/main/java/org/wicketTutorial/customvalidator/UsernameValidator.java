@@ -30,12 +30,11 @@ public class UsernameValidator implements IValidator<String> {
 	public void validate(IValidatable<String> validatable) {
 		String chosenUserName = validatable.getValue();
 		
-		if(existingUsernames.contains(chosenUserName)){
+		if (existingUsernames.contains(chosenUserName)) {
 			ValidationError error = new ValidationError(this);
-			Random random = new Random();
-			
+			error.addKey("username.duplicate");
 			error.setVariable("suggestedUserName", 
-					validatable.getValue() + random.nextInt());
+					validatable.getValue() + new Random().nextInt());
 			validatable.error(error);
 		}
 	}	

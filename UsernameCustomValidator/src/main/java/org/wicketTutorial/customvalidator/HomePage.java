@@ -16,20 +16,21 @@
  */
 package org.wicketTutorial.customvalidator;
 
+import org.apache.wicket.feedback.ErrorLevelFeedbackMessageFilter;
+import org.apache.wicket.feedback.ExactLevelFeedbackMessageFilter;
 import org.apache.wicket.feedback.FeedbackMessage;
-import org.apache.wicket.feedback.IFeedbackMessageFilter;
-import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 
 public class HomePage extends BootstrapBasePage {
 	private static final long serialVersionUID = 1L;
 
     public HomePage(final PageParameters parameters) {		
-		Form form = new Form("form"){
+		Form<Void> form = new Form<Void>("form"){
 			@Override
 			protected void onSubmit() {
 				super.onSubmit();
@@ -37,29 +38,16 @@ public class HomePage extends BootstrapBasePage {
 			}
 		};
     	
-		TextField mail;
+		TextField<String> mail;
 		
-		form.add(mail = new TextField("username", Model.of("")));
+		form.add(mail = new TextField<String>("username", Model.of("")));
 		mail.add(new UsernameValidator());
 		
 		add(new FeedbackPanel("feedbackMessage", 
-				new ExactErrorLevelFilter(FeedbackMessage.ERROR)));
-		add(new FeedbackPanel("succesMessage", 
-				new ExactErrorLevelFilter(FeedbackMessage.SUCCESS)));
+				new ErrorLevelFeedbackMessageFilter(FeedbackMessage.WARNING)));
+		add(new FeedbackPanel("successMessage", 
+				new ExactLevelFeedbackMessageFilter(FeedbackMessage.SUCCESS)));
 		
 		add(form);
-    }
-    
-    class ExactErrorLevelFilter implements IFeedbackMessageFilter{
-    	private int errorLevel;
-
-		public ExactErrorLevelFilter(int errorLevel){
-    		this.errorLevel = errorLevel;
-    	}
-    	
-		public boolean accept(FeedbackMessage message) {
-			return message.getLevel() == errorLevel;
-		}
-    	
     }
 }
