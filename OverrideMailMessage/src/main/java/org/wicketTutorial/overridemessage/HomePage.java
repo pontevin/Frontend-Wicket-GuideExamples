@@ -16,28 +16,26 @@
  */
 package org.wicketTutorial.overridemessage;
 
-import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.validation.validator.EmailAddressValidator;
-import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.EmailTextField;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.validation.validator.EmailAddressValidator;
+import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
 
 public class HomePage extends BootstrapBasePage {
 	private static final long serialVersionUID = 1L;
 
     public HomePage(final PageParameters parameters) {
-		Form form = new Form("form");
-		TextField mail = new TextField("email", Model.of(""));
-		
-		form.add(mail);
+		final TextField<String> mail = new TextField<String>("email", Model.of(""));
 		mail.add(EmailAddressValidator.getInstance());
+		mail.setLabel(Model.of("email address"));
+		
+		final Form<Void> form = new Form<Void>("form");
+		form.add(mail);
 		
 		add(new FeedbackPanel("feedbackMessage"));
-		
 		add(form);
     }
 }
