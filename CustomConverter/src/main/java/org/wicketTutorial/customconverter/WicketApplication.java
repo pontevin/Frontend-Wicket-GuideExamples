@@ -52,9 +52,7 @@ public class WicketApplication extends BootstrapApp
 	@Override
 	protected IConverterLocator newConverterLocator() {
 		ConverterLocator defaultLocator = new ConverterLocator();
-		
 		defaultLocator.set(Pattern.class, new RegExpPatternConverter());
-		
 		return defaultLocator;
 	}
 }

@@ -19,44 +19,44 @@ package org.wicketTutorial.customconverter;
 import java.util.regex.Pattern;
 
 import org.wicketTutorial.commons.bootstrap.layout.BootstrapBasePage;
+import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class HomePage extends BootstrapBasePage {
 	private static final long serialVersionUID = 1L;
-	private Pattern regExpPatter;
+
+	private Pattern regExpPattern;
 	private String stringToSplit;
 	
     public HomePage(final PageParameters parameters) {		
-    	TextField mail;
-		TextField stringToSplitTxt;
 		
-    	Form form = new Form("form"){
+    	Form<Void> form = new Form<Void>("form") {
 			@Override
 			protected void onSubmit() {
 				super.onSubmit();
+				
+				String[] tokens = regExpPattern.split(stringToSplit);
 				String messageResult = "Tokens for the given string and pattern:<br/>";
-				String[] tokens = regExpPatter.split(stringToSplit);
-				
-				
 				for (String token : tokens) {
 					messageResult += "- " + token + "<br/>";
 				}
-				
 				success(messageResult);
 			}
 		};
     	
-		form.setDefaultModel(new CompoundPropertyModel(this));
-		mail = new TextField("regExpPatter");
-		form.add(mail);
-		stringToSplitTxt = new TextField("stringToSplit");
+		form.setDefaultModel(new CompoundPropertyModel<Page>(this));
+		TextField<String> regExpPatternTxt = new TextField<String>("regExpPattern");
+		regExpPatternTxt.setLabel(Model.of("Reg Exp Pattern"));
+		form.add(regExpPatternTxt);
+		TextField<String> stringToSplitTxt = new TextField<String>("stringToSplit");
 		form.add(stringToSplitTxt);
+
 		add(new FeedbackPanel("feedbackMessage").setEscapeModelStrings(false));
-		
 		add(form);
     }
      
